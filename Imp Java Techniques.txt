@@ -1,0 +1,79 @@
+1. ArrayList instantiate
+
+ArrayList<Integer>list = new ArrayList<Integer>();
+
+2. List of List
+
+ArrayList<ArrayList<Integer>>list = new ArrayList<Integer>();
+
+for(i=0; i < list.size(); i++){
+list[i] = new ArrayList<Integer>();
+}
+
+3. Array of ArrayList
+
+ArrayList<Integer>[] arrName = new ArrayList[size]
+
+for(int i = 0 ; i < size; i++){
+arrName[i] = new ArrayList<Integer>();
+}
+
+4. add, get, and addAll
+
+add = listName.add(val);
+get = listName.get(i); // i = index
+addAll = list1.addAll(list2);
+		// merge 2 lists
+
+5. isEmpty and size
+
+isEmpty = listName.isEmpty()
+size = listName.size()
+
+
+6. StringBuilder s = new StringBuilder();
+s.append()
+s.reverse()
+s.insert(0,'character')
+// 0 is offset..so here characters will be prefixed.. eg s is "bc" and we do s.insert(0,'a') so we get "abc"
+
+s.toString()
+
+
+
+7. Character.isLetter(l)
+String s=Character.toString(c);
+
+char x = (char)(ascii int)
+
+8. Hash Map
+
+ HashMap<Integer,Integer>map = new HashMap<Integer,Integer>();
+
+map.containsKey(x)
+
+map.replace(x,++count);    
+map.put(x,1);
+
+Map.Entry = dataType of map
+map.entrySet() = the set which has the data
+
+for(Map.Entry element: map.entrySet(){
+element.getKey();
+element.getValue();
+// USE THIS..with anonymous functions below type conversion is an issue
+// Only conversion needed here is (int)element.getKey()
+
+OR
+
+map.forEach((key,val)->{
+print key,value
+});
+}
+
+9. int c = Math.min(a, b); 
+   int d = Math.max(a, b); 
+
+10. String s= Integer.toString(i);
+	Integer.parseInt(String s);
+

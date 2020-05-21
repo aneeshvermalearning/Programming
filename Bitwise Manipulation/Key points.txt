@@ -1,0 +1,48 @@
+1. Power of 2.. 
+if x & (x-1) == 0
+
+** n&n-1 == 0 if n is power of 2
+** n&n-1 == n-1 if n is not power of 2
+
+2. No. of ones calculation(Hamming weight)=>
+	n&n-1 till n!=0
+3. All subsets
+	for(i->2^n)
+	for(j -> n)
+	if((i & (1<<j))!=0
+4. Rightmost 1 
+	x ^ ( x & (x-1)) 
+	x&x-1 => turns off rightmost 	bit
+5. Rightmost 1 
+	x^ -x
+6. Mask bit => nth bit set
+	x | (1<<n)
+   Mask bit => nth bit clear
+	x & (~(1<<n))
+	
+7. If we have 1 as MSB and we >> then instead of 0 we get 1
+
+8. num ^ num = 0, num ^ 0 = num, xor is associative and commutative
+
+9. Even bits set to 1: 0xAAAAAAAA   (A is 1010) A is 10
+   Odd  bits set to 1: 0x55555555   (5 is 0101)
+
+10. 0x0F => 00000....00001111
+    0xF0 => 00000....11110000
+Can generate patterns using this
+
+11. S = X + 2*A
+    sum xor   and
+12. MSB(Find rightmost set bit)
+	Do it by bit smearing to ensure that all the bits to the right of the first 1 are also 1:
+	N = N| (N>>1);
+        N = N| (N>>2);
+        N = N| (N>>4);
+        N = N| (N>>8);
+	N= N+1(to overload and push 1)
+	N = N>>1;
+https://www.hackerearth.com/practice/notes/bit-manipulation/
+	1+2+4+8 = 31
+	take 010000...0 for example
+	and n>>1,n>>2..etc..
+	all bits to right will be smeared

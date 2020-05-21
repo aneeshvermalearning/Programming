@@ -1,0 +1,172 @@
+1. Find single number where all other numbers occur twice
+eg: [7,3,5,4,5,3,4]
+=>
+* num ^ num = 0
+* num ^ 0 = num
+* Xor is commutative and associative
+
+7^3^5^4^5^3^4 =
+7^(3^3)^(5^5)^(4^4)
+7^0^0^0 = 7
+
+int res = ar[0]; 
+for(int i = 1; i < ar_size; i++) 
+     res = res ^ ar[i]; 
+
+
+2. Find single number where all other numbers occur thrice.
+eg: [2,2,3,2]
+
+//https://medium.com/pranayaggarwal25/find-the-element-that-appears-once-in-array-but-other-elements-appear-thrice-663066d5cf9
+
+1) ones — At any point in time, this variable holds XOR of all the elements which have appeared only once.
+2) twos — At any point in time, this variable holds XOR of all the elements which have appeared only twice.
+
+twos = store numbers occuring twice
+	twos| (ones&a[i])
+	st
+ones = store numbers occuring once;
+            ones = ones ^ x;
+       Xor will remove if number 	       occurs twice
+
+The last 3 lines of code convert common 1’s between “ones” and “twos” to zeros. So if an element has appeared once or twice, the last three lines do nothing.
+
+If an element appears third time, last 3 lines of code remove common 1’s of “ones” and “twos” — which is the bit representation of “x”.
+Thus both “ones” and “twos” end up losing bit representation of “x”.
+
+
+The final answer we want is the value present in “ones” — because, it holds the unique element.
+
+3. Add one to number without arithmetic operations
+
+way1: ~x = -(x+1)
+      So, (x+1) = -(~x)
+way2: Flip all bits after rightmost 0, 	then flip the bit
+
+4. Turn off the rightmost set bit
+	n&n-1
+
+5. No. power of 4=>
+	if power of 2..and no. of 	zeroes even before 1
+
+        return n != 0 && ((n&(n-1)) == 0) && (n & 0xAAAAAAAA) == 0; 
+
+0xAAAAAAAA =>
+A = 1010
+0xAAAAAAAA = ...10101010101010101010
+i.e even bits set
+
+And of number with this should be zero so that it is power of 4.
+
+6. n%d where d is power of 2 is n&(d-1)
+
+7. Circular rotation.
+	Right: n>>d | n<< 32-d
+	Left: n<<d | n >> 32-d
+
+8. Count set bits
+Brian Kernighan’s Algorithm: n& n-1,count till n !=0 
+
+9. Swap 2 numbers without using temp variable.
+	a = a^b
+	b = b^a (b = b ^ (a^b)) // b becomes a as associative and commutative property
+	a = b^a (a = b(which is a after swap) ^ (a ^ b)) // a becomes b as associative and commutative property
+10. Swap 2 nibbles in a byte
+A nibble is a four-bit aggregation, or half an octet. There are two nibbles in a byte.
+	((x & 0x0F) << 4 | (x & 0xF0) >> 4); 
+
+10. Multiply 2 numbers using bitwise
+
+Russian Peasant Algo
+
+The value of a*b is same as (a*2)*(b/2) if b is even, otherwise the value is same as ((a*2)*(b/2) + a). 
+
+int res = 0;   
+   
+        // While second number doesn't become 1 
+        while (b > 0) 
+        { 
+             // If second number becomes odd,  
+             // add the first number to result 
+             if ((b & 1) != 0) 
+                 res = res + a; 
+   
+            // Double the first number  
+            // and halve the second number 
+            a = a << 1; 
+            b = b >> 1; 
+        } 
+
+
+
+11. add two bit strings.
+
+Make them equal in length..by stringBuilder function.. str.insert(0,'0')
+
+String first,second;
+for(int i = n-1; i>-0; i--){
+    int firstBit = first.charAt(i)
+    int secondBit = second.charAt(i)
+
+    int sum = firstBit^secondBit^carry
+/*
+ 0^0^0 = 0
+ 1^0^0 = 1
+ 1^1^0 = 0 (1^1 = 0)
+ 1^1^1 = 1
+*/
+}
+res = String.valueOf((char)sum)+res
+
+carry = (firstBit & secondBit)|
+	(secondBit & carry) |
+	(firstBit & carry)
+// if any 2 of three bits 1,1 then there will be a carry
+}
+if(carry == 1)
+	res = "1" + res;
+// overflow
+
+12. UpperCase and LowerCase Conversion
+	char c = 'a' // a character
+	c^32 // it will change the case of char
+a = 97
+
+1100001
+(64)1 (32)1 (16)0 (8)0 (4)0 (2)0 (1)1
+
+1100001 ^ 32 =>
+1100001 ^ 0100000
+
+Here (32)1 is already set se 1^1 = 0. Hence -32
+So 97-32 = 65 which is 'A'
+
+if char c = 'A'
+A = 65
+
+1000001 ^ 0100000
+
+0(32) ^ 1 = 1
+
+So Bit will get set..
+1000001 ^ 0100000 = 1100001
+= 97
+= 'a'
+
+12. XOR without using XOR
+
+=> Use AND and OR
+x and y = 3(011) and 5(101)
+
+1. x|y => All cases where either x or y or both has set bits. 0-0 case wont be there.
+
+2. ~x|~y => Removal of 1-1 case. ~x will unset all 1 in x. ~y  will unset all 1 in y. 0 | 0 will be zero.
+
+3. Result(x^y) = x|y & ~x|~y 
+
+
+
+13. When we do XOR of numbers, we get 0 as XOR value just before a multiple of 4. This keeps repeating before every multiple of 4.
+
+eg. 1^2^3 = 0, so 1^2^3^4 = 4
+

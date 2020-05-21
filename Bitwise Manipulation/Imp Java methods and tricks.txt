@@ -1,0 +1,9 @@
+1. java.lang.Integer.bitCount()
+	To get bit count
+	eg. 1010=> 2
+	// no need for n&n-1 approach
+2. Integer.lowestOneBit(a)
+	Rightmost bit
+3. to Binary String
+	Integer.toBinaryString(a)
+

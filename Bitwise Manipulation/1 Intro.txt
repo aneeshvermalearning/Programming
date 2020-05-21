@@ -1,0 +1,129 @@
+The Bitwise Algorithms are used to perform operations at bit-level or to manipulate bits in different ways.
+
+The bitwise operations are found to be much faster and are some times used to improve the efficiency of a program.
+
+1 byte = 8 bits
+
+INT = 4 bytes = 32 bits
+
+32 31 30 .....  4 3 2 1
+|   |  |        | | | |
+		8 4 2 1
+MSB (most significant bit) is a sign bit(32nd)
+
+* 32nd bit is used to distinguish positive and negative numbers. So max value is 2^31 - 1 (214,748,3647) and min value is -2^31(-214,748,3648)
+/*
+Why max val is 2^31 -1 ?
+
+There are four well-known ways to represent signed numbers in a binary computing system.
+The most common is two's complement, which allows a signed integral type with n bits to represent numbers from -2(n-1) through 2(n-1)-1. 
+(Other possibilities include offset binary, sign-magnitude, and ones' complement.)
+
+Only one zero.
+no separate +0 and -0
+
+Which gives you range of 0 to 2,147,483,647 numbers stored using 31 bits.
+Remember 0 is counted as part of positive number.
+
+When storing negative numbers as 0 is already counted in positive range, you can store upto -2,147,483,648 using 31 bits.
+
+
+*************MAIN********************
+Counting starts from zero 
+
+eg .
+2 bits => max value 3 => 2^2-1(in actual its 2^0 + 2^1)
+*************************************
+
+============================
+How negative integers are stored.
+They are stored in 2's complement form, So -9 will be stored as 2's complement of 9.
+So 9 is stored in 32 bit system as 0000 0000 0000 0000 0000 0000 0000 1001 
+and -9 will be stored as 1111 1111 1111 1111 1111 1111 1111 0111 (2's complement of 9).
+
+ALSO
+0...00101 is 2^0 + 2^2 = 5
+
+if the first bit is 1, the value is -2^31 + the sum of all bits set to 1 (to the power of 2).
+
+e.g. 1...111100 is -2^31 + 2^30 + ... + 2^2 = -4
+=============================
+Q. How can 31st bit be set if 2^31-1 is max value and 2^31 cannot be stored in int.
+
+=>0100000..0000
+setting 31st bit might seem as 2^31 but in actual its 2^0 + 2^1 + 2^2 .. 2^30 == 2^31 - 1 because the counting always start from 0.
+2^n - 1 is just the arithmetic equivalent of 2^0 + 2^1 + 2^2 .. 2^30.
+
+*/
+
+
+2's compliment:
+
+Two's complement is a clever way of storing integers so that common math problems are very simple to implement.
+
+To understand, you have to think of the numbers in binary.
+
+It basically says,
+
+For zero, use all 0's.
+For positive integers, start counting up, with a maximum of 2(number of bits - 1)-1.
+For negative integers, do exactly the same thing, but switch the role of 0's and 1's (so instead of starting with 0000, start with 1111 - that's the "complement" part).
+
+0000 - zero
+0001 - one
+0010 - two
+0011 - three
+0100 to 0111 - four to seven
+
+
+1111 ...  1111 - negative one.... -2^31 + 2^30 .... 2^1 + 2^0 = -1
+1111 ...  1110 - negative two
+1111 ...  1101 - negative three
+1111 ...  1100 to 1000 - negative four to negative eight
+
+
+1’s complement of a binary number is another binary number obtained by toggling all bits in it, i.e., transforming the 0 bit to 1 and the 1 bit to 0.
+
+2’s complement of a binary number is 1 added to the 1’s complement of the binary number.
+2's complement of "0111" is  "1001" =>
+			0111 => 1000 (1's compliment)
+			1000 => 1001 (adding 0001)
+**************************************************************************************
+Circle
+
+max value is 2^31 -1 or 2^0 + 2^1 + 2^2 .. 2^30 
+
+0 1111111...1111 
+
+if we add even 1 in this we get
+
+1 0000000...0000
+
+i.e for 32nd bit
+
+-2^31(- because sign bit set)
+
+magnitude of 2^31 and not 2^32-1 is because all are zeroes and only 32nd bit is set and as we know counting starts from 0, hence 2^31. 
+
+
+# whenever the value of an integral data type exceeds the range, the value wraps around to other side of range.
+
+
+e.g if add 2 to 2^31-1
+
+then value becomes -2^31 + 1 (i.e less than the minimum value)
+
+So its like a circle
+
+**************************************************************************************
+Application
+
+Operations with bits are used in Data compression (data is compressed by converting it from one representation to another, to reduce the space) ,Exclusive-Or Encryption (an algorithm to encrypt the data for safety issues). In order to encode, decode or compress files we have to extract the data at bit level.
+
+Applications of bit operations:
+
+1) They are widely used in areas of graphics ,specially XOR(Exclusive OR) operations.
+2) They are widely used in the embedded systems, in situations, where we need to set/clear/toggle just one single bit of a specific register without modifying the other contents. We can do OR/AND/XOR operations with the appropriate mask for the bit position.
+3) Data structure like n-bit map can be used to allocate n-size resource pool to represent the current status.
+4) Bits are used in networking, framing the packets of numerous bits which is sent to another system generally through any type of serial interface.
+

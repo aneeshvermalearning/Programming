@@ -1,0 +1,135 @@
+Base10 => 583 => 5*10^2 + 5*10^1 + 5*10^0
+
+Base2(binary) => 101 => 1*2^2 + 0*2^1 + 1*2^0
+
+101+011 => 101
+	   011 (limit is 2=> 1+1)
+	 = 1000
+
+--------------------------------------
+NEGATIVE NUMBER REPRESENTATION
+
+Sign bit
+0 = +
+1 = -
+
+//assume 8 bit
+18 =>   0(sign bit) 0 0 1 0 0 1 0
+
+-18 =>  1(sign bit) . . .. . . . .
+
+SO To get -18 we need to add 1
+
+	001010(no sign bit)
+       +??????
+      =1000000
+
+What should we add in the number(no sign bit) so that we are able to add 1 to the next bit(i.e changing the sign bit to 1 by adding 1)
+
+Solution=2's compliment
+
+	0010010 
+       +1101101(inverse or 1's compl.)
+       =1111111
+
+Here if we will add 1
+	1111111
+	     +1
+       10000000	
+
+So we successfully change the sign bit and negate the number.
+------------------------------------------------
+
+Shifting
+
+Logical vs Arithmetic
+
+Logical(even move sign bit)
+
+e.g 23
+
+	0 0010111
+Left Shift  <<
+	0 0101110 (even the sign bit shifts in logical shift)
+
+= 46(i.e 23*2)
+
+
+	0 0010111
+Right Shift  >>
+	0 0001011 (even the sign bit shifts in logical shift)
+
+= 11(i.e 23/2)
+
+=================
+
+-23
+
+
+Logical shift
+
+	1 1101001
+Right Shift  >>
+	0 1110100 (even the sign bit shifts in logical shift)
+
+= 116(no arithmetic relation)
+
+
+
+Arithmetic shift
+
+	1 1101001
+Right Shift  >>
+	1 1110100 
+(move everything including sign bit but then add 1 to to the sign bit)
+
+= -12(-23/2)
+---------------------------------------------------
+
+Masks
+
+
+Getting the ith bit
+-------------------
+	00[1]01100
+see if this bit is 1
+	
+	00[1]01100
+       &00 1 00000
+       =00 1 00000
+
+   (x&(1<<i)) != 0
+
+1<<i is mask
+
+
+Setting the ith bit
+-------------------	
+
+	00[1]01100
+       |00 1 00000
+       =00 1 00000
+
+
+	00[0]01100
+       |00 1 00000
+       =00 1 00000
+Or will set irrespective of 0 or 1
+as  0|1 = 1
+and 1|1 = 1
+
+    x|(1<<i)
+
+Clearing the ith bit
+-------------------
+
+	00[1]01100
+       &11 0 11111
+       =00 0 01100
+
+
+mask creation=>
+1<<i is    00100000
+~ 1<<i is  11011111
+
+1 everywhere else except ith position

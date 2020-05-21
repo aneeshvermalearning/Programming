@@ -1,0 +1,62 @@
+1. Given a non-negative integer num, return the number of steps to reduce it to zero. If the current number is even, you have to divide it by 2, otherwise, you have to subtract 1 from it.
+
+ 
+
+Example 1:
+
+Input: num = 14
+Output: 6
+Explanation: 
+Step 1) 14 is even; divide by 2 and obtain 7. 
+Step 2) 7 is odd; subtract 1 and obtain 6.
+Step 3) 6 is even; divide by 2 and obtain 3. 
+Step 4) 3 is odd; subtract 1 and obtain 2. 
+Step 5) 2 is even; divide by 2 and obtain 1. 
+Step 6) 1 is odd; subtract 1 and obtain 0.
+
+
+=> Solution 
+
+Explanation
+At each step, we either subtract 1 from num, or we divide num by 2. In binary, these two operations do something very simple, but very interesting, to a number!
+
+Recall that odd numbers always have a last bit of 1. Subtracting 1, from an odd number, changes the last bit from 1 to 0.
+
+Dividing by 2 removes the last bit from the number.
+
+
+Code
+
+class Solution {
+ static int count_num_ones(int num) {
+  int num_ones = 0;
+
+  while (num != 0) {
+   num = num & (num - 1);
+   num_ones++;
+  }
+  return num_ones;
+ }
+ public int numberOfSteps(int num) {
+  // 1 step to remove 0(even) by shifting.
+  // 2 steps to remove 1..first -1(last bit 1 to 0)
+  // now last bit 0 so we can shift.
+  int msb_num = num;
+  msb_num = msb_num | (msb_num >> 1);
+  msb_num = msb_num | (msb_num >> 2);
+  msb_num = msb_num | (msb_num >> 4);
+  msb_num = msb_num | (msb_num >> 8);
+  msb_num = msb_num | (msb_num >> 16);
+
+  int count_msb = count_num_ones(msb_num);
+  int actual_num_ones = count_num_ones(num);
+
+  // System.out.println(actual_num_ones);
+  // System.out.println(count_msb);
+
+  return (2 * actual_num_ones) + (count_msb - actual_num_ones) - 1;
+  // -1 because the last number will be one. and to make the whole
+  // number zero we just need to -1 ..not -1 and shift.
+ }
+}
+
